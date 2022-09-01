@@ -25,7 +25,7 @@ def call(java.util.ArrayList listOfResources, matlabHSPro=true, UseNFS=false) {
         }
         // Add correct MAC to licenses work in Docker
         withCredentials([string(credentialsId: 'MAC_ADDR', variable: 'MAC_ADDR')]) {
-            args.add('--mac-address ' + MAC_ADDR)
+            args.add('--LICENSE_SERVER ' + MAC_ADDR)
         }
         }
         else if (listOfResources[i].equalsIgnoreCase( 'Vivado' )) {
