@@ -29,6 +29,7 @@ buildParallelWithDocker(branches2, dockerArgs2){
 */
 
 def call(branchNames, dockerHost, dockerArgs, dockerstages) {
+    sh 'echo $(dockerstages)'
     def tests = [:]
 
     if (dockerArgs instanceof List) {
