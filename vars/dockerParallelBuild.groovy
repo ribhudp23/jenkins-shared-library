@@ -44,14 +44,14 @@ def call(branchNames, dockerHost, dockerArgs, dockerstages) {
                 stage (branchName) {
                     //sh 'chmod +x /usr/local/bin/docker-entrypoint.sh'
                     //sh '/usr/local/bin/docker-entrypoint.sh'
-                    docker.image('tfcollins/hdl-ci:latest').inside(dockerArgs) {
+                    //docker.image('tfcollins/hdl-ci:latest').inside(dockerArgs) {
                         //sh 'chmod +x /usr/local/bin/docker-entrypoint.sh'
                         //sh '/usr/local/bin/docker-entrypoint.sh'
                         
                         //sh 'chmod +x /usr/bin/docker-entrypoint.sh'
                         //sh '/usr/bin/docker-entrypoint.sh'
-                        dockerstages(branchName)
-                    }
+                    //    dockerstages(branchName)
+                    //}
                     
                     def x = docker.image('tfcollins.hdl-ci:latest')
                     sh 'chmod +x /usr/local/bin/docker-entrypoint.sh'
