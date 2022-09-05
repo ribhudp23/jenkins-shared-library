@@ -54,11 +54,13 @@ def call(branchNames, dockerHost, dockerArgs, dockerstages) {
                     //}
                     
                     def x = docker.image('tfcollins.hdl-ci:latest')
+                    def y = x.run(dockerrArgs)                    
                     sh 'chmod +x /usr/local/bin/docker-entrypoint.sh'
-                    x.inside(dockerArgs) {
-                        sh '/usr/bin/docker-entrypoint.sh'
-                        dockerstages(branchName)
-                    }
+                    y.stop()
+                    //x.inside(dockerArgs) {
+                    //    sh '/usr/bin/docker-entrypoint.sh'
+                    //    dockerstages(branchName)
+                    //}
                     cleanWs()
                 }
             }
