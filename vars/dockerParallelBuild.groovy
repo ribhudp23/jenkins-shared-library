@@ -52,7 +52,7 @@ def call(branchNames, dockerHost, dockerArgs, dockerstages) {
                         //sh 'chmod +x /usr/bin/docker-entrypoint.sh'
                         //sh '/usr/bin/docker-entrypoint.sh'
                         dockerstages(branchName)
-                    //}
+                    }
                     
                     //def x = docker.image('tfcollins/hdl-ci:latest')
                     //def y = x.run(dockerArgs)                    
