@@ -42,7 +42,7 @@ def call(branchNames, dockerHost, dockerArgs, dockerstages) {
         tests[branchName] = {
             node (label: dockerHost) {
                 stage (branchName) {
-                    sh 'chmod +x /usr/local/bin/docker-entrypoint.sh'
+                    //sh 'chmod +x /usr/local/bin/docker-entrypoint.sh'
                     //sh '/usr/local/bin/docker-entrypoint.sh'
                     docker.image('tfcollins/hdl-ci:latest').inside(dockerArgs) {
                         //sh 'chmod +x /usr/local/bin/docker-entrypoint.sh'
@@ -50,6 +50,13 @@ def call(branchNames, dockerHost, dockerArgs, dockerstages) {
                         
                         //sh 'chmod +x /usr/bin/docker-entrypoint.sh'
                         //sh '/usr/bin/docker-entrypoint.sh'
+                        dockerstages(branchName)
+                    }
+                    
+                    def x = docker.image('tfcollins.hdl-ci:latest')
+                    sh 'chmod +x /usr/local/bin/docker-entrypoint.sh'
+                    x.inside(dockerArgs) {
+                        sh '/usr/bin/docker-entrypoint.sh'
                         dockerstages(branchName)
                     }
                     cleanWs()
