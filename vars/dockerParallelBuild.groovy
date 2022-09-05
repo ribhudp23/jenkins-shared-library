@@ -31,10 +31,11 @@ buildParallelWithDocker(branches2, dockerArgs2){
 def call(branchNames, dockerHost, dockerArgs, dockerstages) {
     println dockerstages
     def tests = [:]
-
+    
     if (dockerArgs instanceof List) {
         dockerArgs = dockerArgs.join(' ')
     }
+    dockerArgs = '--privileged ' + dockerArgs
 
     for ( i = 0; i < branchNames.size(); i++ ) {
         def branchName = branchNames[i]
@@ -44,19 +45,19 @@ def call(branchNames, dockerHost, dockerArgs, dockerstages) {
                 stage (branchName) {
                     //sh 'chmod +x /usr/local/bin/docker-entrypoint.sh'
                     //sh '/usr/local/bin/docker-entrypoint.sh'
-                    //docker.image('tfcollins/hdl-ci:latest').inside(dockerArgs) {
-                        //sh 'chmod +x /usr/local/bin/docker-entrypoint.sh'
-                        //sh '/usr/local/bin/docker-entrypoint.sh'
+                    docker.image('tfcollins/hdl-ci:latest').inside(dockerArgs) {
+                        sh 'chmod +x /usr/local/bin/docker-entrypoint.sh'
+                        sh '/usr/local/bin/docker-entrypoint.sh'
                         
                         //sh 'chmod +x /usr/bin/docker-entrypoint.sh'
                         //sh '/usr/bin/docker-entrypoint.sh'
-                    //    dockerstages(branchName)
+                        dockerstages(branchName)
                     //}
                     
-                    def x = docker.image('tfcollins/hdl-ci:latest')
-                    def y = x.run(dockerArgs)                    
-                    sh 'chmod +x /usr/local/bin/docker-entrypoint.sh'
-                    y.stop()
+                    //def x = docker.image('tfcollins/hdl-ci:latest')
+                    //def y = x.run(dockerArgs)                    
+                    //sh 'chmod +x /usr/local/bin/docker-entrypoint.sh'
+                    //y.stop()
                     //x.inside(dockerArgs) {
                     //    sh '/usr/bin/docker-entrypoint.sh'
                     //    dockerstages(branchName)
